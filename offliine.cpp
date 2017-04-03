@@ -62,6 +62,20 @@ void * student_thread(void *threadid)
 
 
 
+
+    pthread_exit(NULL);
+}
+
+
+void * D_thread(void *arg)
+{
+
+
+    printf("It's thread D\n");
+
+
+
+
     pthread_exit(NULL);
 }
 
@@ -79,7 +93,7 @@ int main()
     int rc, res;
     void *thread_result;
     pthread_t threads[n+1];
-    pthread_t a_thread, e_thread, c_thread, b_thread ;
+    pthread_t a_thread, e_thread, c_thread, b_thread ,d_thread ;
 
     int x[n+1];
     for(int i=0; i<n+1; i++)x[i] = i;
@@ -197,6 +211,12 @@ int main()
         exit(EXIT_FAILURE);
     }
 
+    res = pthread_create(&d_thread, NULL, D_thread, NULL);
+    if (res != 0)
+    {
+        perror("Thread creation failed");
+        exit(EXIT_FAILURE);
+    }
 
 
     res = pthread_join(b_thread, &thread_result);
@@ -277,8 +297,6 @@ void * C_thread(void *arg)
 
 void * A_thread(void *arg)
 {
-
-
     printf("It's thread A\n");
 
 
