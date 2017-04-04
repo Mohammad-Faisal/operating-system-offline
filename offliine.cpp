@@ -45,6 +45,7 @@ void * student_thread(void *threadid)
         sem_wait(&q1_sem);
     }
 
+
     printf("Wait is over for thread %d \n", *tid);
 
 
